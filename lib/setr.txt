@@ -1,0 +1,50 @@
+banking_app/
+├─ lib/
+│  ├─ main.dart                     # App starts here
+│  ├─ routes.dart                   # All named routes
+│  │
+│  ├─ models/                       # Data models
+│  │  ├─ transaction.dart
+│  │  ├─ user.dart
+│  │  └─ account.dart
+│  │
+│  ├─ services/                     # API & local storage logic
+│  │  ├─ auth_service.dart          # Login / authentication
+│  │  ├─ transaction_service.dart   # Fetch, send transactions
+│  │  └─ local_storage.dart         # SharedPreferences (save token)
+│  │
+│  ├─ screens/                      # All screens
+│  │  ├─ splash_screen.dart
+│  │  ├─ login_screen.dart
+│  │  ├─ home_screen.dart
+│  │  ├─ transaction_screen.dart
+│  │  ├─ profile_screen.dart
+│  │  ├─ send_money_screen.dart
+│  │  └─ history_screen.dart
+│  │
+│  ├─ widgets/                      # Reusable components
+│  │  ├─ custom_card.dart
+│  │  ├─ custom_button.dart
+│  │  └─ balance_widget.dart
+│  │
+│  ├─ utils/                        # Helper functions
+│  │  ├─ app_colors.dart
+│  │  ├─ app_text_styles.dart
+│  │  └─ formatters.dart            # Format dates, currency
+│  │
+│  ├─ constants/                    # Static values
+│  │  └─ app_strings.dart
+│  │
+│  ├─ config/                       # API URLs / endpoints
+│  │  └─ api_config.dart
+│  │
+│  ├─ assets/                       # All images/icons/fonts
+│  │  ├─ images/
+│  │  └─ icons/
+│  │
+│  └─ helpers/                      # Reusable functions (optional)
+│     └─ navigation_helper.dart     # Simple navigateWithAnim, etc.
+│
+├─ pubspec.yaml
+└─ README.md
+
