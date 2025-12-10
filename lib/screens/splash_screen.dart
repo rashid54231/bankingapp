@@ -13,7 +13,6 @@ class _SplashScreenState extends State<SplashScreen>
   late AnimationController _controller;
   late Animation<double> _fadeAnimation;
   late Animation<double> _scaleAnimation;
-  late Animation<double> _rotationAnimation;
 
   @override
   void initState() {
@@ -35,11 +34,6 @@ class _SplashScreenState extends State<SplashScreen>
       CurvedAnimation(parent: _controller, curve: Curves.easeOutBack),
     );
 
-    // Gentle continuous rotation for a premium feel
-    _rotationAnimation = Tween<double>(begin: 0, end: 0.1).animate(
-      CurvedAnimation(parent: _controller, curve: Curves.linear),
-    );
-
     _controller.forward();
 
     // Navigate after splash
@@ -47,7 +41,7 @@ class _SplashScreenState extends State<SplashScreen>
   }
 
   void _navigateToLogin() async {
-    await Future.delayed(const Duration(milliseconds: 2800)); // Slightly longer for animation
+    await Future.delayed(const Duration(milliseconds: 2800));
     if (mounted) {
       Navigator.pushReplacementNamed(context, Routes.login);
     }
@@ -68,8 +62,8 @@ class _SplashScreenState extends State<SplashScreen>
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
             colors: [
-              Color(0xFF1E3A8A), // Deep blue
-              Color(0xFF3B82F6), // Bright blue
+              Color(0xFF1E3A8A),
+              Color(0xFF3B82F6),
               Color(0xFF60A5FA),
             ],
           ),
@@ -79,91 +73,88 @@ class _SplashScreenState extends State<SplashScreen>
             opacity: _fadeAnimation,
             child: ScaleTransition(
               scale: _scaleAnimation,
-              child: RotationTransition(
-                turns: _rotationAnimation,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    // Modern Bank Icon with Shadow & Glow
-                    Container(
-                      padding: const EdgeInsets.all(30),
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Colors.white.withOpacity(0.2),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.white.withOpacity(0.3),
-                            blurRadius: 30,
-                            spreadRadius: 10,
-                          ),
-                        ],
-                      ),
-                      child: const Icon(
-                        Icons.account_balance,
-                        size: 100,
-                        color: Colors.white,
-                      ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  // Modern Bank Icon with Shadow & Glow
+                  Container(
+                    padding: const EdgeInsets.all(30),
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Colors.white.withOpacity(0.2),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.white.withOpacity(0.3),
+                          blurRadius: 30,
+                          spreadRadius: 10,
+                        ),
+                      ],
                     ),
-
-                    const SizedBox(height: 40),
-
-                    // App Name with elegant styling
-                    const Text(
-                      'Simple Bank',
-                      style: TextStyle(
-                        fontSize: 36,
-                        fontWeight: FontWeight.w800,
-                        color: Colors.white,
-                        letterSpacing: 2.0,
-                        shadows: [
-                          Shadow(
-                            offset: Offset(0, 2),
-                            blurRadius: 10,
-                            color: Colors.black26,
-                          ),
-                        ],
-                      ),
+                    child: const Icon(
+                      Icons.account_balance,
+                      size: 100,
+                      color: Colors.white,
                     ),
+                  ),
 
-                    const SizedBox(height: 12),
+                  const SizedBox(height: 40),
 
-                    // Tagline
-                    Text(
-                      'Secure • Fast • Yours',
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: Colors.white.withOpacity(0.9),
-                        fontWeight: FontWeight.w300,
-                        letterSpacing: 4.0,
-                      ),
+                  // App Name with elegant styling
+                  const Text(
+                    'Simple Bank',
+                    style: TextStyle(
+                      fontSize: 36,
+                      fontWeight: FontWeight.w800,
+                      color: Colors.white,
+                      letterSpacing: 2.0,
+                      shadows: [
+                        Shadow(
+                          offset: Offset(0, 2),
+                          blurRadius: 10,
+                          color: Colors.black26,
+                        ),
+                      ],
                     ),
+                  ),
 
-                    const SizedBox(height: 60),
+                  const SizedBox(height: 12),
 
-                    // Loading indicator with style
-                    SizedBox(
-                      width: 60,
-                      height: 60,
-                      child: CircularProgressIndicator(
-                        valueColor: const AlwaysStoppedAnimation<Color>(Colors.white),
-                        strokeWidth: 4,
-                        backgroundColor: Colors.white.withOpacity(0.3),
-                      ),
+                  // Tagline
+                  Text(
+                    'Secure • Fast • Yours',
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: Colors.white.withOpacity(0.9),
+                      fontWeight: FontWeight.w300,
+                      letterSpacing: 4.0,
                     ),
+                  ),
 
-                    const SizedBox(height: 20),
+                  const SizedBox(height: 60),
 
-                    // Powered by text
-                    Text(
-                      'Powered by Flutter',
-                      style: TextStyle(
-                        fontSize: 12,
-                        color: Colors.white.withOpacity(0.7),
-                        fontStyle: FontStyle.italic,
-                      ),
+                  // Loading indicator with style
+                  SizedBox(
+                    width: 60,
+                    height: 60,
+                    child: CircularProgressIndicator(
+                      valueColor: const AlwaysStoppedAnimation<Color>(Colors.white),
+                      strokeWidth: 4,
+                      backgroundColor: Colors.white.withOpacity(0.3),
                     ),
-                  ],
-                ),
+                  ),
+
+                  const SizedBox(height: 20),
+
+                  // Powered by text
+                  Text(
+                    'Powered by Flutter',
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: Colors.white.withOpacity(0.7),
+                      fontStyle: FontStyle.italic,
+                    ),
+                  ),
+                ],
               ),
             ),
           ),
