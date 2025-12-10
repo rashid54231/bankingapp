@@ -252,49 +252,50 @@ class HomeScreen extends StatelessWidget {
                 const SizedBox(height: 24),
 
                 // ------------------------------------
-                // MY CARDS — FIXED HEIGHT
+                // MY CARDS — OVERFLOW FIXED
                 // ------------------------------------
-                Padding(
-                  padding: const EdgeInsets.only(left: 16.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text(
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Padding(
+                      padding: EdgeInsets.only(left: 16.0),
+                      child: Text(
                         'My Cards',
                         style: TextStyle(
                             fontSize: 22,
                             fontWeight: FontWeight.bold,
                             color: Colors.black87),
                       ),
-                      const SizedBox(height: 16),
-                      SizedBox(
-                        height: 210,
-                        child: ListView(
-                          scrollDirection: Axis.horizontal,
-                          children: [
-                            _buildCreditCard(
-                              cardNumber: '**** **** **** 4829',
-                              cardHolder: 'JOHN DOE',
-                              expiryDate: '12/25',
-                              balance: '\$5,420.00',
-                              gradient: const LinearGradient(
-                                colors: [Color(0xFF1e3c72), Color(0xFF2a5298)],
-                              ),
+                    ),
+                    const SizedBox(height: 16),
+                    SizedBox(
+                      height: 210,
+                      child: ListView(
+                        scrollDirection: Axis.horizontal,
+                        padding: const EdgeInsets.only(left: 16.0),
+                        children: [
+                          _buildCreditCard(
+                            cardNumber: '**** **** **** 4829',
+                            cardHolder: 'JOHN DOE',
+                            expiryDate: '12/25',
+                            balance: '\$5,420.00',
+                            gradient: const LinearGradient(
+                              colors: [Color(0xFF1e3c72), Color(0xFF2a5298)],
                             ),
-                            _buildCreditCard(
-                              cardNumber: '**** **** **** 7651',
-                              cardHolder: 'JOHN DOE',
-                              expiryDate: '09/26',
-                              balance: '\$12,180.00',
-                              gradient: const LinearGradient(
-                                colors: [Color(0xFFee0979), Color(0xFFff6a00)],
-                              ),
+                          ),
+                          _buildCreditCard(
+                            cardNumber: '**** **** **** 7651',
+                            cardHolder: 'JOHN DOE',
+                            expiryDate: '09/26',
+                            balance: '\$12,180.00',
+                            gradient: const LinearGradient(
+                              colors: [Color(0xFFee0979), Color(0xFFff6a00)],
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
 
                 const SizedBox(height: 24),
@@ -530,8 +531,9 @@ class HomeScreen extends StatelessWidget {
   }) {
     return Container(
       width: 310,
+      height: 210,
       margin: const EdgeInsets.only(right: 16),
-      padding: const EdgeInsets.all(24),
+      padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         gradient: gradient,
         borderRadius: BorderRadius.circular(24),
@@ -553,72 +555,77 @@ class HomeScreen extends StatelessWidget {
             children: [
               const Text(
                 'Balance',
-                style: TextStyle(color: Colors.white70, fontSize: 14),
+                style: TextStyle(color: Colors.white70, fontSize: 13),
               ),
               Icon(Icons.contactless_rounded,
-                  color: Colors.white.withOpacity(0.8), size: 32),
+                  color: Colors.white.withOpacity(0.8), size: 28),
             ],
           ),
           Text(
             balance,
             style: const TextStyle(
-                color: Colors.white, fontSize: 26, fontWeight: FontWeight.bold),
+                color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold),
+            overflow: TextOverflow.ellipsis,
           ),
-          const SizedBox(height: 20),
           Text(
             cardNumber,
             style: const TextStyle(
               color: Colors.white,
-              fontSize: 18,
+              fontSize: 16,
               letterSpacing: 2,
             ),
+            overflow: TextOverflow.ellipsis,
           ),
-          const SizedBox(height: 16),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text('CARD HOLDER',
-                      style: TextStyle(
-                          color: Colors.white60,
-                          fontSize: 10,
-                          letterSpacing: 1)),
-                  const SizedBox(height: 4),
-                  Text(cardHolder,
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w600,
-                      )),
-                ],
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text('CARD HOLDER',
+                        style: TextStyle(
+                            color: Colors.white60,
+                            fontSize: 9,
+                            letterSpacing: 1)),
+                    const SizedBox(height: 4),
+                    Text(cardHolder,
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 13,
+                          fontWeight: FontWeight.w600,
+                        ),
+                        overflow: TextOverflow.ellipsis),
+                  ],
+                ),
               ),
+              const SizedBox(width: 8),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Text('EXPIRES',
                       style: TextStyle(
                           color: Colors.white60,
-                          fontSize: 10,
+                          fontSize: 9,
                           letterSpacing: 1)),
                   const SizedBox(height: 4),
                   Text(expiryDate,
                       style: const TextStyle(
                         color: Colors.white,
-                        fontSize: 14,
+                        fontSize: 13,
                         fontWeight: FontWeight.w600,
                       )),
                 ],
               ),
+              const SizedBox(width: 8),
               Container(
-                padding: const EdgeInsets.all(8),
+                padding: const EdgeInsets.all(6),
                 decoration: BoxDecoration(
                   color: Colors.white.withOpacity(0.2),
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: const Icon(Icons.more_horiz,
-                    color: Colors.white, size: 20),
+                    color: Colors.white, size: 18),
               ),
             ],
           ),
