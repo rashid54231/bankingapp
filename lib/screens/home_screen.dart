@@ -9,6 +9,10 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[50],
+
+      // ------------------------------------
+      // APP BAR
+      // ------------------------------------
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.transparent,
@@ -43,9 +47,7 @@ class HomeScreen extends StatelessWidget {
             children: [
               IconButton(
                 icon: const Icon(Icons.notifications_outlined, color: Colors.white),
-                onPressed: () {
-                  // Handle notifications
-                },
+                onPressed: () {},
               ),
               Positioned(
                 right: 8,
@@ -72,131 +74,220 @@ class HomeScreen extends StatelessWidget {
           ),
         ],
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // Enhanced Header Card with Total Balance
-            Container(
-              width: double.infinity,
-              decoration: BoxDecoration(
-                gradient: const LinearGradient(
-                  colors: [Color(0xFF667eea), Color(0xFF764ba2)],
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                ),
-                borderRadius: const BorderRadius.only(
-                  bottomLeft: Radius.circular(40),
-                  bottomRight: Radius.circular(40),
-                ),
-                boxShadow: [
-                  BoxShadow(
-                    color: const Color(0xFF667eea).withOpacity(0.3),
-                    spreadRadius: 2,
-                    blurRadius: 20,
-                    offset: const Offset(0, 10),
+
+      // ------------------------------------
+      // BODY — with SAFEAREA & PADDING (FIXED)
+      // ------------------------------------
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.only(bottom: 20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+
+                // ------------------------------------
+                // HEADER BALANCE CARD
+                // ------------------------------------
+                Container(
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    gradient: const LinearGradient(
+                      colors: [Color(0xFF667eea), Color(0xFF764ba2)],
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                    ),
+                    borderRadius: const BorderRadius.only(
+                      bottomLeft: Radius.circular(40),
+                      bottomRight: Radius.circular(40),
+                    ),
+                    boxShadow: [
+                      BoxShadow(
+                        color: const Color(0xFF667eea).withOpacity(0.3),
+                        spreadRadius: 2,
+                        blurRadius: 20,
+                        offset: const Offset(0, 10),
+                      ),
+                    ],
                   ),
-                ],
-              ),
-              padding: const EdgeInsets.fromLTRB(24, 10, 24, 30),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  padding: const EdgeInsets.fromLTRB(24, 10, 24, 30),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+
+                      // Name Row
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          const Text(
-                            'Good Morning,',
-                            style: TextStyle(
-                              color: Colors.white70,
-                              fontSize: 14,
-                            ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: const [
+                              Text(
+                                'Good Morning,',
+                                style: TextStyle(color: Colors.white70, fontSize: 14),
+                              ),
+                              SizedBox(height: 4),
+                              Text(
+                                'John Doe',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
                           ),
-                          const SizedBox(height: 4),
-                          const Text(
-                            'John Doe',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
+
+                          // GOLD BADGE
+                          Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                            decoration: BoxDecoration(
+                              color: Colors.white.withOpacity(0.2),
+                              borderRadius: BorderRadius.circular(20),
+                              border: Border.all(color: Colors.white.withOpacity(0.3)),
+                            ),
+                            child: Row(
+                              children: [
+                                Icon(Icons.stars, color: Colors.amber[300], size: 16),
+                                const SizedBox(width: 4),
+                                const Text(
+                                  'Gold',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ],
                             ),
                           ),
                         ],
                       ),
+
+                      const SizedBox(height: 24),
+
+                      const Text(
+                        'Total Balance',
+                        style: TextStyle(color: Colors.white70, fontSize: 14),
+                      ),
+                      const SizedBox(height: 8),
+
+                      Row(
+                        children: [
+                          const Text(
+                            '\$17,000',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 42,
+                              fontWeight: FontWeight.bold,
+                              letterSpacing: -1,
+                            ),
+                          ),
+                          const Text(
+                            '.00',
+                            style: TextStyle(
+                              color: Colors.white70,
+                              fontSize: 24,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          const SizedBox(width: 12),
+                          Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                            decoration: BoxDecoration(
+                              color: Colors.green.withOpacity(0.3),
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            child: const Row(
+                              children: [
+                                Icon(Icons.trending_up,
+                                    color: Colors.greenAccent, size: 14),
+                                SizedBox(width: 4),
+                                Text(
+                                  '+12.5%',
+                                  style: TextStyle(
+                                      color: Colors.greenAccent,
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+
+                      const SizedBox(height: 24),
+
+                      // QUICK ACTIONS
                       Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                        padding: const EdgeInsets.all(16),
                         decoration: BoxDecoration(
-                          color: Colors.white.withOpacity(0.2),
+                          color: Colors.white.withOpacity(0.15),
                           borderRadius: BorderRadius.circular(20),
-                          border: Border.all(color: Colors.white.withOpacity(0.3)),
+                          border: Border.all(color: Colors.white.withOpacity(0.2)),
                         ),
                         child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
-                            Icon(Icons.stars, color: Colors.amber[300], size: 16),
-                            const SizedBox(width: 4),
-                            const Text(
-                              'Gold',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 12,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
+                            _buildQuickAction(
+                                icon: Icons.send_rounded, label: 'Send', onTap: () {}),
+                            _buildQuickAction(
+                                icon: Icons.call_received_rounded,
+                                label: 'Request',
+                                onTap: () {}),
+                            _buildQuickAction(
+                                icon: Icons.qr_code_scanner_rounded,
+                                label: 'Scan',
+                                onTap: () {}),
+                            _buildQuickAction(
+                                icon: Icons.grid_view_rounded,
+                                label: 'More',
+                                onTap: () {}),
                           ],
                         ),
                       ),
                     ],
                   ),
-                  const SizedBox(height: 24),
-                  const Text(
-                    'Total Balance',
-                    style: TextStyle(
-                      color: Colors.white70,
-                      fontSize: 14,
-                    ),
-                  ),
-                  const SizedBox(height: 8),
-                  Row(
+                ),
+
+                const SizedBox(height: 24),
+
+                // ------------------------------------
+                // MY CARDS — FIXED HEIGHT
+                // ------------------------------------
+                Padding(
+                  padding: const EdgeInsets.only(left: 16.0),
+                  child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const Text(
-                        '\$17,000',
+                        'My Cards',
                         style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 42,
-                          fontWeight: FontWeight.bold,
-                          letterSpacing: -1,
-                        ),
+                            fontSize: 22,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black87),
                       ),
-                      const Text(
-                        '.00',
-                        style: TextStyle(
-                          color: Colors.white70,
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      const SizedBox(width: 12),
-                      Container(
-                        margin: const EdgeInsets.only(top: 8),
-                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                        decoration: BoxDecoration(
-                          color: Colors.green.withOpacity(0.3),
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: const Row(
+                      const SizedBox(height: 16),
+                      SizedBox(
+                        height: 210,
+                        child: ListView(
+                          scrollDirection: Axis.horizontal,
                           children: [
-                            Icon(Icons.trending_up, color: Colors.greenAccent, size: 14),
-                            SizedBox(width: 4),
-                            Text(
-                              '+12.5%',
-                              style: TextStyle(
-                                color: Colors.greenAccent,
-                                fontSize: 12,
-                                fontWeight: FontWeight.bold,
+                            _buildCreditCard(
+                              cardNumber: '**** **** **** 4829',
+                              cardHolder: 'JOHN DOE',
+                              expiryDate: '12/25',
+                              balance: '\$5,420.00',
+                              gradient: const LinearGradient(
+                                colors: [Color(0xFF1e3c72), Color(0xFF2a5298)],
+                              ),
+                            ),
+                            _buildCreditCard(
+                              cardNumber: '**** **** **** 7651',
+                              cardHolder: 'JOHN DOE',
+                              expiryDate: '09/26',
+                              balance: '\$12,180.00',
+                              gradient: const LinearGradient(
+                                colors: [Color(0xFFee0979), Color(0xFFff6a00)],
                               ),
                             ),
                           ],
@@ -204,286 +295,203 @@ class HomeScreen extends StatelessWidget {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 24),
-                  Container(
-                    padding: const EdgeInsets.all(16),
-                    decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.15),
-                      borderRadius: BorderRadius.circular(20),
-                      border: Border.all(color: Colors.white.withOpacity(0.2)),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        _buildQuickAction(
-                          icon: Icons.send_rounded,
-                          label: 'Send',
-                          onTap: () {
-                            // Handle send money
-                          },
+                ),
+
+                const SizedBox(height: 24),
+
+                // ------------------------------------
+                // INCOME / EXPENSE CARDS
+                // ------------------------------------
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: _buildStatCard(
+                          title: 'Income',
+                          amount: '\$4,250',
+                          percentage: '+8.2%',
+                          icon: Icons.arrow_downward_rounded,
+                          color: Colors.green,
                         ),
-                        _buildQuickAction(
-                          icon: Icons.call_received_rounded,
-                          label: 'Request',
-                          onTap: () {
-                            // Handle request money
-                          },
+                      ),
+                      const SizedBox(width: 12),
+                      Expanded(
+                        child: _buildStatCard(
+                          title: 'Expenses',
+                          amount: '\$2,840',
+                          percentage: '+3.1%',
+                          icon: Icons.arrow_upward_rounded,
+                          color: Colors.red,
                         ),
-                        _buildQuickAction(
-                          icon: Icons.qr_code_scanner_rounded,
-                          label: 'Scan',
-                          onTap: () {
-                            // Handle QR scan
-                          },
-                        ),
-                        _buildQuickAction(
-                          icon: Icons.grid_view_rounded,
-                          label: 'More',
-                          onTap: () {
-                            // Handle more options
-                          },
-                        ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
-                ],
-              ),
+                ),
+
+                const SizedBox(height: 24),
+
+                // ------------------------------------
+                // ACCOUNTS
+                // ------------------------------------
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text(
+                        'My Accounts',
+                        style: TextStyle(
+                            fontSize: 22,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black87),
+                      ),
+                      TextButton.icon(
+                        onPressed: () {},
+                        icon: const Icon(Icons.arrow_forward, size: 16),
+                        label: const Text('View All'),
+                      ),
+                    ],
+                  ),
+                ),
+
+                const SizedBox(height: 12),
+
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  child: Column(
+                    children: [
+                      _buildEnhancedAccountCard(
+                        title: 'Checking Account',
+                        accountNumber: '****4829',
+                        balance: '\$5,000.00',
+                        icon: Icons.account_balance_wallet_rounded,
+                        color: const Color(0xFF667eea),
+                        onTap: () {
+                          Navigator.pushNamed(context, Routes.transaction);
+                        },
+                      ),
+                      const SizedBox(height: 12),
+                      _buildEnhancedAccountCard(
+                        title: 'Savings Account',
+                        accountNumber: '****7651',
+                        balance: '\$12,000.00',
+                        icon: Icons.savings_rounded,
+                        color: const Color(0xFF06beb6),
+                        onTap: () {
+                          Navigator.pushNamed(context, Routes.transaction);
+                        },
+                      ),
+                      const SizedBox(height: 12),
+                      _buildEnhancedAccountCard(
+                        title: 'Credit Card',
+                        accountNumber: '****3421',
+                        balance: '\$3,500.00',
+                        icon: Icons.credit_card_rounded,
+                        color: const Color(0xFFf093fb),
+                        onTap: () {
+                          Navigator.pushNamed(context, Routes.transaction);
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+
+                const SizedBox(height: 24),
+
+                // ------------------------------------
+                // RECENT TRANSACTIONS
+                // ------------------------------------
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text(
+                        'Recent Transactions',
+                        style: TextStyle(
+                            fontSize: 22,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black87),
+                      ),
+                      TextButton.icon(
+                        onPressed: () {
+                          Navigator.pushNamed(context, Routes.transaction);
+                        },
+                        icon: const Icon(Icons.arrow_forward, size: 16),
+                        label: const Text('See All'),
+                      ),
+                    ],
+                  ),
+                ),
+
+                const SizedBox(height: 12),
+
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  child: Column(
+                    children: [
+                      _buildTransactionItem(
+                        icon: Icons.shopping_bag_rounded,
+                        title: 'Amazon Purchase',
+                        category: 'Shopping',
+                        date: 'Today, 2:30 PM',
+                        amount: '-\$89.99',
+                        isNegative: true,
+                        color: Colors.orange,
+                      ),
+                      _buildTransactionItem(
+                        icon: Icons.restaurant_rounded,
+                        title: 'The Garden Restaurant',
+                        category: 'Food & Dining',
+                        date: 'Yesterday, 7:15 PM',
+                        amount: '-\$45.50',
+                        isNegative: true,
+                        color: Colors.red,
+                      ),
+                      _buildTransactionItem(
+                        icon: Icons.account_balance_rounded,
+                        title: 'Salary Deposit',
+                        category: 'Income',
+                        date: '2 days ago',
+                        amount: '+\$2,500.00',
+                        isNegative: false,
+                        color: Colors.green,
+                      ),
+                      _buildTransactionItem(
+                        icon: Icons.local_gas_station_rounded,
+                        title: 'Shell Gas Station',
+                        category: 'Transportation',
+                        date: '3 days ago',
+                        amount: '-\$52.00',
+                        isNegative: true,
+                        color: Colors.blue,
+                      ),
+                      _buildTransactionItem(
+                        icon: Icons.subscriptions_rounded,
+                        title: 'Netflix Subscription',
+                        category: 'Entertainment',
+                        date: '5 days ago',
+                        amount: '-\$14.99',
+                        isNegative: true,
+                        color: Colors.purple,
+                      ),
+                    ],
+                  ),
+                ),
+
+                const SizedBox(height: 40),
+              ],
             ),
-
-            const SizedBox(height: 24),
-
-            // Cards Carousel Section
-            Padding(
-              padding: const EdgeInsets.only(left: 16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    'My Cards',
-                    style: TextStyle(
-                      fontSize: 22,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black87,
-                    ),
-                  ),
-                  const SizedBox(height: 16),
-                  SizedBox(
-                    height: 200,
-                    child: ListView(
-                      scrollDirection: Axis.horizontal,
-                      children: [
-                        _buildCreditCard(
-                          cardNumber: '**** **** **** 4829',
-                          cardHolder: 'JOHN DOE',
-                          expiryDate: '12/25',
-                          balance: '\$5,420.00',
-                          gradient: const LinearGradient(
-                            colors: [Color(0xFF1e3c72), Color(0xFF2a5298)],
-                          ),
-                        ),
-                        _buildCreditCard(
-                          cardNumber: '**** **** **** 7651',
-                          cardHolder: 'JOHN DOE',
-                          expiryDate: '09/26',
-                          balance: '\$12,180.00',
-                          gradient: const LinearGradient(
-                            colors: [Color(0xFFee0979), Color(0xFFff6a00)],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-
-            const SizedBox(height: 32),
-
-            // Financial Overview Cards
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: _buildStatCard(
-                      title: 'Income',
-                      amount: '\$4,250',
-                      percentage: '+8.2%',
-                      icon: Icons.arrow_downward_rounded,
-                      color: Colors.green,
-                    ),
-                  ),
-                  const SizedBox(width: 12),
-                  Expanded(
-                    child: _buildStatCard(
-                      title: 'Expenses',
-                      amount: '\$2,840',
-                      percentage: '+3.1%',
-                      icon: Icons.arrow_upward_rounded,
-                      color: Colors.red,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-
-            const SizedBox(height: 24),
-
-            // Accounts Section
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Text(
-                    'My Accounts',
-                    style: TextStyle(
-                      fontSize: 22,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black87,
-                    ),
-                  ),
-                  TextButton.icon(
-                    onPressed: () {
-                      // View all accounts
-                    },
-                    icon: const Icon(Icons.arrow_forward, size: 16),
-                    label: const Text('View All'),
-                  ),
-                ],
-              ),
-            ),
-
-            const SizedBox(height: 12),
-
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: Column(
-                children: [
-                  _buildEnhancedAccountCard(
-                    title: 'Checking Account',
-                    accountNumber: '****4829',
-                    balance: '\$5,000.00',
-                    icon: Icons.account_balance_wallet_rounded,
-                    color: const Color(0xFF667eea),
-                    onTap: () {
-                      Navigator.pushNamed(context, Routes.transaction);
-                    },
-                  ),
-                  const SizedBox(height: 12),
-                  _buildEnhancedAccountCard(
-                    title: 'Savings Account',
-                    accountNumber: '****7651',
-                    balance: '\$12,000.00',
-                    icon: Icons.savings_rounded,
-                    color: const Color(0xFF06beb6),
-                    onTap: () {
-                      Navigator.pushNamed(context, Routes.transaction);
-                    },
-                  ),
-                  const SizedBox(height: 12),
-                  _buildEnhancedAccountCard(
-                    title: 'Credit Card',
-                    accountNumber: '****3421',
-                    balance: '\$3,500.00',
-                    icon: Icons.credit_card_rounded,
-                    color: const Color(0xFFf093fb),
-                    onTap: () {
-                      Navigator.pushNamed(context, Routes.transaction);
-                    },
-                  ),
-                ],
-              ),
-            ),
-
-            const SizedBox(height: 24),
-
-            // Recent Transactions Section
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Text(
-                    'Recent Transactions',
-                    style: TextStyle(
-                      fontSize: 22,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black87,
-                    ),
-                  ),
-                  TextButton.icon(
-                    onPressed: () {
-                      Navigator.pushNamed(context, Routes.transaction);
-                    },
-                    icon: const Icon(Icons.arrow_forward, size: 16),
-                    label: const Text('See All'),
-                  ),
-                ],
-              ),
-            ),
-
-            const SizedBox(height: 12),
-
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: Column(
-                children: [
-                  _buildTransactionItem(
-                    icon: Icons.shopping_bag_rounded,
-                    title: 'Amazon Purchase',
-                    category: 'Shopping',
-                    date: 'Today, 2:30 PM',
-                    amount: '-\$89.99',
-                    isNegative: true,
-                    color: Colors.orange,
-                  ),
-                  _buildTransactionItem(
-                    icon: Icons.restaurant_rounded,
-                    title: 'The Garden Restaurant',
-                    category: 'Food & Dining',
-                    date: 'Yesterday, 7:15 PM',
-                    amount: '-\$45.50',
-                    isNegative: true,
-                    color: Colors.red,
-                  ),
-                  _buildTransactionItem(
-                    icon: Icons.account_balance_rounded,
-                    title: 'Salary Deposit',
-                    category: 'Income',
-                    date: '2 days ago',
-                    amount: '+\$2,500.00',
-                    isNegative: false,
-                    color: Colors.green,
-                  ),
-                  _buildTransactionItem(
-                    icon: Icons.local_gas_station_rounded,
-                    title: 'Shell Gas Station',
-                    category: 'Transportation',
-                    date: '3 days ago',
-                    amount: '-\$52.00',
-                    isNegative: true,
-                    color: Colors.blue,
-                  ),
-                  _buildTransactionItem(
-                    icon: Icons.subscriptions_rounded,
-                    title: 'Netflix Subscription',
-                    category: 'Entertainment',
-                    date: '5 days ago',
-                    amount: '-\$14.99',
-                    isNegative: true,
-                    color: Colors.purple,
-                  ),
-                ],
-              ),
-            ),
-
-            const SizedBox(height: 32),
-          ],
+          ),
         ),
       ),
     );
   }
+
+  // ----------------------------------------------------
+  // WIDGET FUNCTIONS
+  // ----------------------------------------------------
 
   Widget _buildQuickAction({
     required IconData icon,
@@ -500,20 +508,13 @@ class HomeScreen extends StatelessWidget {
               color: Colors.white.withOpacity(0.25),
               borderRadius: BorderRadius.circular(16),
             ),
-            child: Icon(
-              icon,
-              color: Colors.white,
-              size: 26,
-            ),
+            child: Icon(icon, color: Colors.white, size: 26),
           ),
           const SizedBox(height: 8),
           Text(
             label,
             style: const TextStyle(
-              color: Colors.white,
-              fontSize: 12,
-              fontWeight: FontWeight.w600,
-            ),
+                color: Colors.white, fontSize: 12, fontWeight: FontWeight.w600),
           ),
         ],
       ),
@@ -528,7 +529,7 @@ class HomeScreen extends StatelessWidget {
     required Gradient gradient,
   }) {
     return Container(
-      width: 320,
+      width: 310,
       margin: const EdgeInsets.only(right: 16),
       padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
@@ -544,29 +545,24 @@ class HomeScreen extends StatelessWidget {
         ],
       ),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               const Text(
                 'Balance',
-                style: TextStyle(
-                  color: Colors.white70,
-                  fontSize: 14,
-                ),
+                style: TextStyle(color: Colors.white70, fontSize: 14),
               ),
-              Icon(Icons.contactless_rounded, color: Colors.white.withOpacity(0.8), size: 32),
+              Icon(Icons.contactless_rounded,
+                  color: Colors.white.withOpacity(0.8), size: 32),
             ],
           ),
           Text(
             balance,
             style: const TextStyle(
-              color: Colors.white,
-              fontSize: 28,
-              fontWeight: FontWeight.bold,
-            ),
+                color: Colors.white, fontSize: 26, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 20),
           Text(
@@ -575,7 +571,6 @@ class HomeScreen extends StatelessWidget {
               color: Colors.white,
               fontSize: 18,
               letterSpacing: 2,
-              fontWeight: FontWeight.w500,
             ),
           ),
           const SizedBox(height: 16),
@@ -585,46 +580,35 @@ class HomeScreen extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    'CARD HOLDER',
-                    style: TextStyle(
-                      color: Colors.white60,
-                      fontSize: 10,
-                      letterSpacing: 1,
-                    ),
-                  ),
+                  const Text('CARD HOLDER',
+                      style: TextStyle(
+                          color: Colors.white60,
+                          fontSize: 10,
+                          letterSpacing: 1)),
                   const SizedBox(height: 4),
-                  Text(
-                    cardHolder,
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 14,
-                      fontWeight: FontWeight.w600,
-                      letterSpacing: 1,
-                    ),
-                  ),
+                  Text(cardHolder,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600,
+                      )),
                 ],
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    'EXPIRES',
-                    style: TextStyle(
-                      color: Colors.white60,
-                      fontSize: 10,
-                      letterSpacing: 1,
-                    ),
-                  ),
+                  const Text('EXPIRES',
+                      style: TextStyle(
+                          color: Colors.white60,
+                          fontSize: 10,
+                          letterSpacing: 1)),
                   const SizedBox(height: 4),
-                  Text(
-                    expiryDate,
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 14,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
+                  Text(expiryDate,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600,
+                      )),
                 ],
               ),
               Container(
@@ -633,7 +617,8 @@ class HomeScreen extends StatelessWidget {
                   color: Colors.white.withOpacity(0.2),
                   borderRadius: BorderRadius.circular(8),
                 ),
-                child: const Icon(Icons.more_horiz, color: Colors.white, size: 20),
+                child: const Icon(Icons.more_horiz,
+                    color: Colors.white, size: 20),
               ),
             ],
           ),
@@ -659,7 +644,6 @@ class HomeScreen extends StatelessWidget {
             color: Colors.grey.withOpacity(0.1),
             spreadRadius: 1,
             blurRadius: 10,
-            offset: const Offset(0, 2),
           ),
         ],
       ),
@@ -675,10 +659,11 @@ class HomeScreen extends StatelessWidget {
                   color: color.withOpacity(0.1),
                   borderRadius: BorderRadius.circular(12),
                 ),
-                child: Icon(icon, color: color, size: 20),
+                child: Icon(icon, color: color, size: 22),
               ),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                padding:
+                const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                 decoration: BoxDecoration(
                   color: color.withOpacity(0.1),
                   borderRadius: BorderRadius.circular(12),
@@ -686,30 +671,23 @@ class HomeScreen extends StatelessWidget {
                 child: Text(
                   percentage,
                   style: TextStyle(
-                    color: color,
-                    fontSize: 11,
-                    fontWeight: FontWeight.bold,
-                  ),
+                      color: color,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 11),
                 ),
               ),
             ],
           ),
           const SizedBox(height: 12),
-          Text(
-            title,
-            style: TextStyle(
-              color: Colors.grey[600],
-              fontSize: 13,
-            ),
-          ),
+          Text(title,
+              style: TextStyle(color: Colors.grey[600], fontSize: 13)),
           const SizedBox(height: 4),
           Text(
             amount,
             style: const TextStyle(
-              color: Colors.black87,
-              fontSize: 22,
-              fontWeight: FontWeight.bold,
-            ),
+                fontSize: 22,
+                fontWeight: FontWeight.bold,
+                color: Colors.black87),
           ),
         ],
       ),
@@ -734,9 +712,7 @@ class HomeScreen extends StatelessWidget {
           boxShadow: [
             BoxShadow(
               color: Colors.grey.withOpacity(0.1),
-              spreadRadius: 1,
               blurRadius: 10,
-              offset: const Offset(0, 2),
             ),
           ],
         ),
@@ -753,42 +729,36 @@ class HomeScreen extends StatelessWidget {
               child: Icon(icon, color: Colors.white, size: 28),
             ),
             const SizedBox(width: 16),
+
+            // Text Section
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    title,
-                    style: const TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black87,
-                    ),
-                  ),
+                  Text(title,
+                      style: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black87)),
                   const SizedBox(height: 4),
-                  Text(
-                    accountNumber,
-                    style: TextStyle(
-                      fontSize: 13,
-                      color: Colors.grey[600],
-                    ),
-                  ),
+                  Text(accountNumber,
+                      style: TextStyle(fontSize: 13, color: Colors.grey[600])),
                 ],
               ),
             ),
+
+            // Balance section
             Column(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                Text(
-                  balance,
-                  style: const TextStyle(
-                    fontSize: 17,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black87,
-                  ),
-                ),
+                Text(balance,
+                    style: const TextStyle(
+                        fontSize: 17,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black87)),
                 const SizedBox(height: 4),
-                Icon(Icons.arrow_forward_ios, size: 14, color: Colors.grey[400]),
+                Icon(Icons.arrow_forward_ios,
+                    size: 14, color: Colors.grey[400]),
               ],
             ),
           ],
@@ -814,11 +784,9 @@ class HomeScreen extends StatelessWidget {
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withOpacity(0.08),
-            spreadRadius: 1,
-            blurRadius: 8,
-            offset: const Offset(0, 2),
-          ),
+              color: Colors.grey.withOpacity(0.08),
+              blurRadius: 8,
+              offset: const Offset(0, 2)),
         ],
       ),
       child: Row(
@@ -832,38 +800,30 @@ class HomeScreen extends StatelessWidget {
             child: Icon(icon, color: color, size: 24),
           ),
           const SizedBox(width: 16),
+
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  title,
-                  style: const TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.w600,
-                    color: Colors.black87,
-                  ),
-                ),
+                Text(title,
+                    style: const TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.black87)),
                 const SizedBox(height: 4),
-                Text(
-                  category,
-                  style: TextStyle(
-                    fontSize: 12,
-                    color: Colors.grey[500],
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
+                Text(category,
+                    style: TextStyle(
+                        color: Colors.grey[500],
+                        fontSize: 12,
+                        fontWeight: FontWeight.w500)),
                 const SizedBox(height: 2),
-                Text(
-                  date,
-                  style: TextStyle(
-                    fontSize: 12,
-                    color: Colors.grey[400],
-                  ),
-                ),
+                Text(date,
+                    style: TextStyle(
+                        fontSize: 12, color: Colors.grey[400])),
               ],
             ),
           ),
+
           Text(
             amount,
             style: TextStyle(
